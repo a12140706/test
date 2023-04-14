@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>上機測驗</h1>
+
+<?php
+echo "相同點：
+
+二者都是交通工具。
+都需要維護和保養。
+都有輪子和引擎等。
+
+不同點：
+
+汽車四個輪子，機車只有兩個輪子。
+汽車需要汽車駕照，機車則是摩托車駕照。
+汽車比機車大。\n";
+	
+interface Vehicle {
+    public function start();
+    public function stop();
+}
+
+class Car implements Vehicle {
+    public function start() {
+        echo "汽車啟動\n";
+    }
+    public function stop() {
+        echo "汽車熄火\n";
+    }
+}
+
+class Motorcycle implements Vehicle {
+    public function start() {
+        echo "機車啟動\n";
+    }
+    public function stop() {
+        echo "機車熄火\n";
+    }
+}
+echo '1.';
+$car = new Car();
+$car->start(); 
+$car->stop(); 
+
+$motorcycle = new Motorcycle();
+$motorcycle->start(); 
+$motorcycle->stop(); 
+	
+echo '2-1.';
+$str = "人易科技:上　機　測　驗 - 演算法";
+$str = str_replace(':', '：', $str);
+echo $str;
+
+echo '<br>2-2.';
+
+$str = "人易科技:上 機 測 驗 - 演算法";
+$str = preg_replace("/(?<!-)\s+(?!-)/", "", $str);
+echo $str;
+
+echo '<br>2-3.';
+
+$str = "人易科技:上 機 測 驗 - 演算法";
+$colon_position = strpos($str, ":");
+$hyphen_position = strpos($str, "-");
+$result = substr($str, $colon_position + 1, $hyphen_position - $colon_position - 1);
+echo $result;
+
+echo '<br>3.';
+$data = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+$odd_sum = 0;
+$even_sum = 0;
+
+foreach ($data as $value) {
+  if ($value % 2 == 0) {
+    $even_sum += $value;
+  } else {
+    $odd_sum += $value;
+  }
+}
+$result = $odd_sum - $even_sum;
+echo "奇數值總和減去偶數值總和為：" . $result;
+
+echo '<br>3-1.';
+$data = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+$odd = array();
+$even = array();
+
+foreach ($data as $value) {
+  if ($value % 2 == 0) {
+    $even[] = $value;
+  } else {
+    $odd[] = $value;
+  }
+}
+echo "奇數值";
+print_r($odd);
+echo "偶數值";
+print_r($even);
+	
+echo '<br>4.';	
+$data = array(77, 5, 5, 22, 13, 55, 97, 4, 796, 1, 0, 9);
+$length = count($data);
+for ($i = 0; $i < $length; $i++) {
+  for ($j = $i + 1; $j < $length; $j++) {
+    if ($data[$i] > $data[$j]) {
+      $temp = $data[$i];
+      $data[$i] = $data[$j];
+      $data[$j] = $temp;
+    }
+  }
+}
+echo "正序排列";
+print_r($data);
+
+echo '<br>5.';		
+$a = array(77, 5, 5, 22, 13, 55, 97, 4, 796, 1, 0, 9);
+$b = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+$c = array();
+$d = array();
+$e = array();
+
+foreach ($a as $value_a) {
+    foreach ($b as $value_b) {
+        if ($value_a === $value_b) {
+            $c[] = $value_a;
+            break;
+        }
+    }
+}
+	
+for ($i = 0; $i < count($a); $i++) {
+  $found = false;
+  	for ($j = 0; $j < count($b); $j++) {
+    	if ($a[$i] == $b[$j]) {
+      	$found = true;
+     	break;
+    	}
+  	}
+  	if (!$found) {
+    	$d[] = $a[$i];
+  	}
+}
+
+foreach ($a as $value) {
+    $e[] = $value;
+}
+foreach ($b as $value) {
+    $exist = false;
+    foreach ($e as $eValue) {
+        if ($value == $eValue) {
+            $exist = true;
+            break;
+        }
+    }
+    if (!$exist) {
+        $e[] = $value;
+    }
+}
+echo "陣列c";
+print_r($c);
+echo "陣列d";
+print_r($d);
+echo "陣列e";
+print_r($e);
+	
+
+function twoSum($nums, $target) {
+
+		if (count($nums) < 2 || count($nums) > 103 || $target < -109 || $target > 109) {
+            return array();
+        }
+        $hash_table = array();
+        for ($i = 0; $i < count($nums); $i++) {
+            if ($nums[$i] < -109 || $nums[$i] > 109) {
+                return array();
+            }
+            $diff = $target - $nums[$i];
+            if (array_key_exists($diff, $hash_table)) {
+                return array($hash_table[$diff], $i);
+            }
+            $hash_table[$nums[$i]] = $i;
+        }
+        return array();
+    }
+$nums = array(2,7,11,15,102,108);
+$target = 109;
+$result = twoSum($nums, $target);
+echo '<br>6.';	
+print_r($result);	
+?>
+
+
+</body>
+</html>
